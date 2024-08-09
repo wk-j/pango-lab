@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.24.24.38" />
-    <PackageReference Include="GtkSharp.Dependencies" Version="1.1.1" />
+    <!-- <PackageReference Include="GtkSharp.Dependencies" Version="1.1.1" /> -->
     <PackageReference Include="SkiaSharp" Version="2.88.6" />
   </ItemGroup>
 
