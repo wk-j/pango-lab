@@ -71,22 +71,6 @@ For Rust:
 - Automatically adjusts image size based on text content
 - Outputs PNG image files
 
-## Usage
-
-Both C# and Rust versions accept command-line arguments for customization:
-
-```
-text-to-image <text> <font_description> <output_path>
-```
-
-- `<text>`: The text to convert (use quotes for multi-word text)
-- `<font_description>`: Pango font description (e.g., "Sans 12")
-- `<output_path>`: Path for the output PNG file
-
-Example:
-```
-text-to-image "Hello, World!" "Sans 24" output.png
-```
 
 ## Sample Output
 
