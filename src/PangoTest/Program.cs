@@ -2,30 +2,25 @@ using Cairo;
 using Pango;
 using SkiaSharp;
 
-class Program
+public class Program
 {
     static void Main(string[] args)
     {
-        string text = "จินตนาการอยู่เหนือความรู้ทั้งปวง กตัญญู";
-        string fontDescription = "Sans 20";
-        int width = 800;
-        int height = 300;
+        string text = "อยู่เหนือความรู้ทั้งปวง กตัญญู Imagination";
+        string fontDescription = "THSarabun 50";
         string outputPath = "image.png";
 
-        ConvertTextToImage(text, fontDescription, width, height, outputPath);
+        ConvertTextToImage(text, fontDescription, outputPath);
     }
 
-    static void ConvertTextToImage(string text, string fontDescription, int width, int height, string outputPath)
+    static void ConvertTextToImage(string text, string fontDescription, string outputPath)
     {
-        using (var surface = new ImageSurface(Format.Argb32, width, height))
-        using (var context = new Cairo.Context(surface))
+        // Create a temporary surface to measure the text
+        using (var tempSurface = new ImageSurface(Format.Argb32, 1, 1))
+        using (var tempContext = new Cairo.Context(tempSurface))
         {
-            // Clear the surface with white color
-            context.SetSourceRGB(1, 1, 1);
-            context.Paint();
-
             // Create a Pango layout
-            var layout = Pango.CairoHelper.CreateLayout(context);
+            var layout = Pango.CairoHelper.CreateLayout(tempContext);
             layout.SetText(text);
 
             // Set font description
@@ -36,42 +31,52 @@ class Program
             int textWidth, textHeight;
             layout.GetPixelSize(out textWidth, out textHeight);
 
-            // Calculate position to center the text
-            double x = (width - textWidth) / 2;
-            double y = (height - textHeight) / 2;
+            // Add some padding
+            int padding = 20;
+            int width = textWidth + (padding * 2);
+            int height = textHeight + (padding * 2);
 
-            // Draw the Pango layout
-            context.SetSourceRGB(0, 0, 0);
-            context.MoveTo(x, y);
-            Pango.CairoHelper.ShowLayout(context, layout);
-
-            // Convert Cairo surface to SkiaSharp bitmap
-            var skImageInfo = new SKImageInfo(width, height, SKColorType.Bgra8888, SKAlphaType.Premul);
-            using (var skSurface = SKSurface.Create(skImageInfo))
+            // Create the actual surface with the calculated dimensions
+            using (var surface = new ImageSurface(Format.Argb32, width, height))
+            using (var context = new Cairo.Context(surface))
             {
-                var skCanvas = skSurface.Canvas;
-                var pixelData = new byte[width * height * 4];
-                System.Runtime.InteropServices.Marshal.Copy(surface.DataPtr, pixelData, 0, pixelData.Length);
+                // Clear the surface with white color
+                context.SetSourceRGB(1, 1, 1);
+                context.Paint();
 
-                using (var skBitmap = new SKBitmap())
-                {
-                    var pinnedPixelData = System.Runtime.InteropServices.GCHandle.Alloc(pixelData, System.Runtime.InteropServices.GCHandleType.Pinned);
-                    try
-                    {
-                        skBitmap.InstallPixels(skImageInfo, pinnedPixelData.AddrOfPinnedObject());
-                        skCanvas.DrawBitmap(skBitmap, 0, 0);
-                    }
-                    finally
-                    {
-                        pinnedPixelData.Free();
-                    }
-                }
+                // Draw the Pango layout
+                context.SetSourceRGB(0, 0, 0);
+                context.MoveTo(padding, padding);
+                Pango.CairoHelper.ShowLayout(context, layout);
 
-                using (var image = skSurface.Snapshot())
-                using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
-                using (var stream = File.OpenWrite(outputPath))
+                // Convert Cairo surface to SkiaSharp bitmap
+                var skImageInfo = new SKImageInfo(width, height, SKColorType.Bgra8888, SKAlphaType.Premul);
+                using (var skSurface = SKSurface.Create(skImageInfo))
                 {
-                    data.SaveTo(stream);
+                    var skCanvas = skSurface.Canvas;
+                    var pixelData = new byte[width * height * 4];
+                    System.Runtime.InteropServices.Marshal.Copy(surface.DataPtr, pixelData, 0, pixelData.Length);
+
+                    using (var skBitmap = new SKBitmap())
+                    {
+                        var pinnedPixelData = System.Runtime.InteropServices.GCHandle.Alloc(pixelData, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        try
+                        {
+                            skBitmap.InstallPixels(skImageInfo, pinnedPixelData.AddrOfPinnedObject());
+                            skCanvas.DrawBitmap(skBitmap, 0, 0);
+                        }
+                        finally
+                        {
+                            pinnedPixelData.Free();
+                        }
+                    }
+
+                    using (var image = skSurface.Snapshot())
+                    using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
+                    using (var stream = File.OpenWrite(outputPath))
+                    {
+                        data.SaveTo(stream);
+                    }
                 }
             }
         }
