@@ -50,4 +50,5 @@ The project uses the following sample text to demonstrate its capabilities:
 
 This text showcases the ability to render Thai text, including complex characters and word combinations.
 
-![](image.png)
+![](output1.png)
+![](output2.png)

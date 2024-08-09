@@ -6,9 +6,9 @@ public class Program
 {
     static void Main(string[] args)
     {
-        string text = "ผู้รู้ กตัญญูพื้น มาตรฐานครุภัณฑ์";
+        string text = "กตัญญุตาผู้รู้ที่ครุภัณฑ์ตั้งถิ่นฐาน";
         string fontDescription = "Noto Serif Thai 50";
-        string outputPath = "image.png";
+        string outputPath = "output2.png";
 
         ConvertTextToImage(text, fontDescription, outputPath);
     }

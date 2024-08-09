@@ -3,9 +3,9 @@ use pango::FontDescription;
 use pangocairo::functions::{create_layout, show_layout};
 
 fn main() {
-    let text = "ผู้ไม่รู้ กตัญญูพื้น มาตรฐานครุภัณฑ์";
+    let text = "กตัญญุตาผู้รู้ที่ครุภัณฑ์ตั้งถิ่นฐาน";
     let font_description = "Sao Chingcha 50";
-    let output_path = "image.png";
+    let output_path = "output1.png";
 
     convert_text_to_image(text, font_description, output_path);
     println!("Image saved to {}", output_path);
