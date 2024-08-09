@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "app/text-to-image"
+]
+resolver = "2"

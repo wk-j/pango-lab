@@ -50,3 +50,11 @@ $RECYCLE.BIN/
 # Project-specific
 .aider*
 .venv
+
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# Generated images
+*.png

@@ -1,0 +1,9 @@
+[package]
+name = "text-to-image"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pango = "0.17.4"
+pangocairo = "0.17.0"
+cairo-rs = { version = "0.17.0", features = ["png"] }

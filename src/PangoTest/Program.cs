@@ -6,7 +6,7 @@ public class Program
 {
     static void Main(string[] args)
     {
-        string text = "อยู่เหนือความรู้ทั้งปวง กตัญญู Imagination";
+        string text = "จินตนาการอยู่เหนือความรู้ทั้งปวง กตัญญู (Imagination is more important than knowledge)";
         string fontDescription = "THSarabun 50";
         string outputPath = "image.png";
 
