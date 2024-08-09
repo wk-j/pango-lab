@@ -22,15 +22,6 @@ For Rust:
 - Rust toolchain (1.55.0 or later recommended)
 - Cairo and Pango libraries (same as C# requirements)
 
-## Installation
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/text-to-image-converter.git
-   cd text-to-image-converter
-   ```
-
-2. Install the required dependencies for your chosen implementation (C# or Rust).
 
 ## Building and Running
 
