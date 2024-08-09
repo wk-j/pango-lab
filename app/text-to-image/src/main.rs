@@ -3,8 +3,8 @@ use pango::FontDescription;
 use pangocairo::functions::{create_layout, show_layout};
 
 fn main() {
-    let text = "จินตนาการอยู่เหนือความรู้ทั้งปวง กตัญญู (Imagination is more important than knowledge)";
-    let font_description = "THSarabun 50";
+    let text = "ผู้ไม่รู้ กตัญญูพื้น มาตรฐานครุภัณฑ์";
+    let font_description = "Sao Chingcha 50";
     let output_path = "image.png";
 
     convert_text_to_image(text, font_description, output_path);

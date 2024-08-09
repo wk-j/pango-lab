@@ -6,8 +6,8 @@ public class Program
 {
     static void Main(string[] args)
     {
-        string text = "จินตนาการอยู่เหนือความรู้ทั้งปวง กตัญญู (Imagination is more important than knowledge)";
-        string fontDescription = "THSarabun 50";
+        string text = "ผู้รู้ กตัญญูพื้น มาตรฐานครุภัณฑ์";
+        string fontDescription = "Noto Serif Thai 50";
         string outputPath = "image.png";
 
         ConvertTextToImage(text, fontDescription, outputPath);
